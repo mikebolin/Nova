@@ -1,0 +1,145 @@
+<kendo-grid
+  [data]="gridData"
+  [skip]="skip"
+  [pageSize]="pageSize"
+  [sortable]="{ allowUnsort: false }"
+  [height]="700"
+  (pageChange)="pageChange($event)"
+  [filter]="filter"
+  filterable="menu"
+  (filterChange)="filterChange($event)"
+  (sortChange)="sortChange($event)"
+  (pageChange)="pageChange($event)"
+  [sort]="sort"
+  [pageable]="{
+    buttonCount: buttonCount,
+    info: info,
+    type: type,
+    pageSizes: [25, 50, 100],
+    previousNext: previousNext
+  }"
+  class="queuegrid cursor-pointer"
+>
+  <kendo-grid-column
+    field="dateCreated"
+    title="Date"
+    [width]="100"
+    filter="date"
+    format="{0:d}"
+  >
+    <ng-template kendoGridFilterCellTemplate let-filter>
+      <date-range-filter-cell
+        class="date-range-filter"
+        [filter]="filter"
+        field="dateCreated"
+      >
+      </date-range-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="applicationName" title="Application" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="messageType" title="Type" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="corellationID" title="CorID" [width]="100">
+    <ng-template
+      kendoGridFilterMenuTemplate
+      let-filter
+      let-column="column"
+      let-filterService="filterService"
+    >
+      <kendo-grid-numeric-filter-menu
+        [column]="column"
+        [filter]="filter"
+        [filterService]="filterService"
+      >
+      </kendo-grid-numeric-filter-menu>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="shipmentID" title="ShipmentID" [width]="100">
+    <ng-template
+      kendoGridFilterMenuTemplate
+      let-filter
+      let-column="column"
+      let-filterService="filterService"
+    >
+      <kendo-grid-numeric-filter-menu
+        [column]="column"
+        [filter]="filter"
+        [filterService]="filterService"
+      >
+      </kendo-grid-numeric-filter-menu>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="primaryReference" title="Primary Ref" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="enterpriseName" title="Enterprise" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="userName" title="User" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="statusCode" title="Status" [width]="100">
+    <ng-template
+      kendoGridFilterMenuTemplate
+      let-column="column"
+      let-filter="filter"
+      let-filterService="filterService"
+    >
+      <multicheck-filter
+        [isPrimitive]="true"
+        [field]="column.field"
+        [filterService]="filterService"
+        [currentFilter]="filter"
+        [data]="distinctPrimitive(column.field)"
+      ></multicheck-filter>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="elapsedMilliseconds" title="Timing" [width]="100">
+    <ng-template kendoGridFilterCellTemplate let-filter let-column="column">
+      <kendo-grid-string-filter-cell
+        [showOperators]="false"
+        [column]="column"
+        [filter]="filter"
+      >
+      </kendo-grid-string-filter-cell>
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>

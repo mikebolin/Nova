@@ -1,0 +1,74 @@
+<div class="content-container">
+  <div class="row">
+    <div class="col-5">
+      <kendo-dropdownlist
+        #Enviornment
+        (valueChange)="valueChange($event)"
+        (selectionChange)="selectionChange($event)"
+        [(ngModel)]="selectedEnv"
+        [data]="enviornmentItems"
+      >
+      </kendo-dropdownlist>
+    </div>
+  </div>
+  <div class="p-1 row">
+    <div
+      *ngIf="
+        selectedEnv === 'PROD' || selectedEnv != 'QA' || selectedEnv !== 'DEV'
+      "
+      class="card"
+    >
+      <div class="card-body">
+        <kendo-tabstrip
+          (tabSelect)="onTabSelect($event)"
+          [keepTabContent]="true"
+        >
+          <kendo-tabstrip-tab [title]="'Activity Log'" [selected]="true">
+            <ng-template kendoTabContent>
+              <div
+                [hidden]="isGridFilterToggled"
+                class="marginUntoggledTop row"
+              >
+                <div class="col-12"></div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <app-grid-search
+                    #gridFilters
+                    (toggledFitler)="gridFiltersToggled($event)"
+                    (searchEvent)="searchGridData($event)"
+                    [animation]="'expand'"
+                    [direction]="'down'"
+                    [durationMS]="200"
+                    [showButtonText]="''"
+                    [hideButtonText]="''"
+                  >
+                  </app-grid-search>
+                </div>
+              </div>
+              <div [hidden]="!isGridFilterToggled" class="marginBottom row">
+                <div class="col-12"></div>
+              </div>
+              <div [hidden]="isGridFilterToggled" class="marginUntoggled row">
+                <div class="col-12"></div>
+              </div>
+              <app-activity-grid
+                *ngIf="gridLoaded"
+                [theRecords]="gridData"
+              ></app-activity-grid>
+              <div class=" row">
+                <div class="col-12"></div>
+              </div>
+            </ng-template>
+          </kendo-tabstrip-tab>
+          <kendo-tabstrip-tab [title]="'Error Logs'">
+            <ng-template kendoTabContent *loadOnDemand> </ng-template>
+          </kendo-tabstrip-tab>
+          <kendo-tabstrip-tab [title]="'Service Logs'">
+            <ng-template kendoTabContent *loadOnDemand> </ng-template>
+          </kendo-tabstrip-tab>
+        </kendo-tabstrip>
+      </div>
+    </div>
+  </div>
+</div>

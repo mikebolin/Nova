@@ -1,0 +1,4 @@
+<kendo-autocomplete #storageAutoComplete class="primary m-1" width="900" [suggest]="true" [filterable]="true"
+    [data]="listItems" [placeholder]="thePlaceholder" (valueChange)="valueChangeHandler()"
+    (filterChange)="filterChange($event)" [(ngModel)]="textValue">
+</kendo-autocomplete>

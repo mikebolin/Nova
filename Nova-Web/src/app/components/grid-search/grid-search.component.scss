@@ -1,0 +1,94 @@
+.w-rem-10 {
+  width: 10rem !important;
+}
+
+.w-rem-4 {
+  width: 6rem !important;
+}
+.d-inline-block {
+  width: 200px;
+}
+
+.detail-label {
+  font-size: 1rem;
+  font-weight: bold;
+  // overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+  display: block;
+}
+
+.fieldset {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  margin-right: 20px;
+  padding-left: 10px;
+}
+
+.k-textarea {
+  width: 107%;
+}
+
+input {
+  width: 100%;
+}
+
+.k-dropdown {
+  width: 100%;
+}
+
+.k-datepicker {
+  width: 100%;
+}
+
+.k-numerictextbox {
+  width: 100%;
+}
+
+.k-multiselect-wrap {
+  width: 100%;
+}
+
+.k-multiselect {
+  width: 107%;
+}
+k-picker-wrap k-state-default k-state-focused .k-floatwrap {
+  width: 100%;
+}
+
+.k-textbox {
+  width: 100%;
+}
+
+.k-dateinput,
+.k-datepicker,
+.k-datetimepicker,
+.k-timepicker {
+  width: 105%;
+}
+
+.paddingBottom {
+  padding-bottom: 50px;
+}
+.iconContent {
+  display: block;
+  margin: 0 auto;
+  height: 40px;
+  line-height: 40px;
+  width: 300px;
+  padding: 0px 20px 0px 20px;
+  border: 1px solid red;
+  position: relative;
+}
+.iconDiv {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 40px;
+}
+.centerItems {
+  align-items: center;
+}

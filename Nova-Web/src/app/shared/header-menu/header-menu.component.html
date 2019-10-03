@@ -1,0 +1,60 @@
+<nav id="header-menu" class="header-menu is-fixed-top">
+  <div class="menu-container">
+    <div class="header-menu-brand"></div>
+    <div class="header-menu-item fill-space"></div>
+    <div id="navMenu" class="header-menu-menu">
+      <div class="header-menu-item fill-space"></div>
+      <div class="header-menu-start">
+        <ng-container *ngFor="let topMenuItem of MenuItems">
+          <ng-container
+            *ngTemplateOutlet="
+              tMenuItem;
+              context: { $implicit: topMenuItem, level: 1 }
+            "
+          ></ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<ng-template #tMenuItem let-menuItem let-level="level">
+  <ng-container>
+    <ng-container *ngIf="menuItem.type == menuTypes.Link; else tCategory">
+      <ng-container *ngIf="menuItem.routerLink; else tUrlLink">
+        <a
+          class="header-menu-item is-hoverable"
+          [routerLink]="menuItem.routerLink"
+          [routerLinkActive]="['link-active']"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          {{ menuItem.Label }}
+        </a>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #tUrlLink>
+    <a class="header-menu-item is-hoverable" [href]="menuItem.URL">
+      {{ menuItem.Label }}
+    </a>
+  </ng-template>
+
+  <ng-template #tCategory>
+    <ng-container *ngIf="menuItem.Children && menuItem.Children.length">
+      <a class="header-menu-item has-dropdown is-hoverable">
+        <div class="header-menu-link">{{ menuItem.Label }}</div>
+        <div class="header-menu-dropdown" [class.level2]="level > 1">
+          <ng-container *ngFor="let suMenuItems of menuItem.Children">
+            <ng-container
+              *ngTemplateOutlet="
+                tMenuItem;
+                context: { $implicit: suMenuItems, level: level + 1 }
+              "
+            ></ng-container>
+          </ng-container>
+        </div>
+      </a>
+    </ng-container>
+  </ng-template>
+</ng-template>

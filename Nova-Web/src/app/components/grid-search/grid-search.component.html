@@ -1,0 +1,130 @@
+<div class="float-right;" #anchor>
+  <div [hidden]="show"></div>
+</div>
+<kendo-dropdownbutton
+  [hidden]="show"
+  (itemClick)="onItemClick($event)"
+  [data]="searchByItems"
+  [primary]="true"
+>
+  Filter
+</kendo-dropdownbutton>
+<kendo-popup
+  (anchorViewportLeave)="closeFilters()"
+  positionMode="'fixed'"
+  [anchor]="anchor"
+  [animate]="animate"
+  (anchorViewportLeave)="show = false"
+  *ngIf="show"
+>
+  <div class="content">
+    <div class="row p-1">
+      <div style="text-align: center; font-size: 1.5rem;" class="col-12">
+        {{ titleText }}
+        <i
+          (click)="closeFilters()"
+          class="fa fa-window-close fa-lg"
+          style="color:#d8000c; float: right;"
+        ></i>
+      </div>
+    </div>
+
+    <div class="row p-1">
+      <div class="col-4">
+        <kendo-datetimepicker
+          #Start
+          *ngIf="isDateSearch"
+          [format]="'M/dd/yy hh:mm a'"
+          [placeholder]="'Start Date'"
+          [(value)]="range.start"
+        ></kendo-datetimepicker>
+      </div>
+      <div class="col-4">
+        <kendo-datetimepicker
+          #End
+          *ngIf="isDateSearch"
+          [format]="'M/dd/yy hh:mm a'"
+          [placeholder]="'End Date'"
+          [(value)]="range.end"
+        ></kendo-datetimepicker>
+      </div>
+
+      <div class="col-4"></div>
+    </div>
+    <div *ngIf="isDateSearch" class="row p-1">
+      <div class="col-3">
+        <input
+          #user
+          [placeholder]="'User'"
+          [(ngModel)]="selectedUser"
+          kendoTextBox
+        />
+      </div>
+      <div class="col-3">
+        <kendo-autocomplete
+          #enterprise
+          [(ngModel)]="selectedEnterprise"
+          [placeholder]="'Enterprise'"
+        >
+        </kendo-autocomplete>
+      </div>
+      <div class="col-3">
+        <input
+          style="width:100%;"
+          [(ngModel)]="selectedApplication"
+          [placeholder]="'Application'"
+          #application
+          kendoTextBox
+        />
+      </div>
+      <div class="col-3">
+        <kendo-multiselect
+          style="width:100%"
+          [placeholder]="'Message Type...'"
+          [data]="messageTypeItems"
+          [(ngModel)]="messageTypeValue"
+        ></kendo-multiselect>
+      </div>
+    </div>
+
+    <div *ngIf="!isDateSearch" class="row p-1">
+      <div class="col-6">
+        <kendo-dropdownlist
+          #Identifier
+          [defaultItem]="defaultItem"
+          [itemDisabled]="itemDisabled"
+          (valueChange)="valueChange($event)"
+          (selectionChange)="selectionChange($event)"
+          [textField]="'text'"
+          [valueField]="'value'"
+          [(ngModel)]="selectedIdentifier"
+          [data]="identifierItems"
+        >
+        </kendo-dropdownlist>
+      </div>
+      <div class="col-6">
+        <input
+          [placeholder]="'Value'"
+          [(ngModel)]="selectedIdentifierValue"
+          #Value
+          kendoTextBox
+        />
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="col-12">
+        <div class="centerItems">
+          <button #Search (click)="onSearch()" class="m-1 primary">
+            Search
+          </button>
+          <button #Clear (click)="clearFilters()" class="m-1 secondary">
+            Clear
+          </button>
+          <button (click)="switchSearch()" class="m-1 secondary">
+            {{ switchText }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</kendo-popup>
